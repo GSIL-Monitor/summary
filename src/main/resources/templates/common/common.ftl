@@ -1,0 +1,1 @@
+<type="text/javascript" src="${basePath}/js/jquery.min.js"></script>
