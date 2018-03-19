@@ -73,6 +73,7 @@ public class EmailUtil {
 			transport.connect(host, user, pwd);
 			// 把邮件发送出去
 			transport.sendMessage(message, message.getAllRecipients());
+			transport.close();
 			return true;
 		} catch (Exception e) {
 			e.printStackTrace();

@@ -65,7 +65,7 @@ public class LoginController {
     @ResponseBody
     public Map validateCode(HttpServletRequest request){
         Map map = new HashMap<>();
-
+        System.out.println("测试");
         loginService.validateCode(request);
         return map;
     }
