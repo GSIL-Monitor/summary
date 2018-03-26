@@ -1,8 +1,10 @@
 package com.summary.summary.service.impl;
 
+import com.summary.summary.common.CommonUtil;
 import com.summary.summary.common.EmailUtil;
 import com.summary.summary.common.config.EmailConfig;
 import com.summary.summary.service.LoginService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
@@ -35,12 +37,20 @@ public class LoginServiceImpl implements LoginService {
     private String pwd;
 
     private EmailUtil emailUtil;
+
+    /**
+     *
+     */
+    @Autowired
+    private CommonUtil commonUtil;
+
     @Override
     public Map validateCode(HttpServletRequest request) {
         //生成6位随机数验证码
-        Random random = new Random();
-        Integer verificationCode = random.nextInt(899999);
-        verificationCode = verificationCode + 100000;
+        Integer verificationCode = commonUtil.verificationCode();
+//        Random random = new Random();
+       /* Integer verificationCode = random.nextInt(899999);
+        verificationCode = verificationCode + 100000;*/
         request.getSession().setAttribute("verificationCode", verificationCode);
         request.getSession().setAttribute("userName", "测试用户");
         HttpSession session = request.getSession(true);
@@ -58,7 +68,7 @@ public class LoginServiceImpl implements LoginService {
         map.put("pwd", pwd);
 
         try {
-            emailUtil.sendEmailNoFile(map,"2686151092@qq.com", "重置密码验证码",
+            emailUtil.sendEmailNoFile(map, "2686151092@qq.com", "重置密码验证码",
                     "您重置密码验证码是 " + verificationCode
                             + ",此验证码有效时间为5分钟，请及时输入");
         } catch (IOException e) {
@@ -67,8 +77,6 @@ public class LoginServiceImpl implements LoginService {
 
         return null;
     }
-
-
 
 
 }

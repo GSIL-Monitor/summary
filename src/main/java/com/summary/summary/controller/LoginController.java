@@ -30,11 +30,22 @@ public class LoginController {
 //    String name;
 
     /**
+     * 测试页面
+     * @return
+     */
+    @RequestMapping("test")
+    public String test(){
+        return "test";
+    }
+
+
+    /**
      * 登录页面
      * @return
      */
     @RequestMapping(value = {"/",""})
     public String login(){
+        System.out.println("连接服务器成功");
         return "login";
     }
 
@@ -65,7 +76,6 @@ public class LoginController {
     @ResponseBody
     public Map validateCode(HttpServletRequest request){
         Map map = new HashMap<>();
-
         loginService.validateCode(request);
         return map;
     }

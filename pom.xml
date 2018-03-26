@@ -92,6 +92,11 @@
 			<artifactId>mail</artifactId>
 			<version>${javamail.version}</version>
 		</dependency>
+		<!--模板引擎jar包，各人主要用途是使springboot可以读取html-->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-thymeleaf</artifactId>
+		</dependency>
 	</dependencies>
 
 	<build>
